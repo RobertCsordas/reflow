@@ -1,6 +1,6 @@
 # Quick and Dirty Reflow Hotplate
 
-Quick and dirty hotplate made from the heating element of an (~50 year) old electric stove and 256 lines of C++ code. Should be easy to adapt to any build. The element itself is built in a big iron plate (it's not the US version where the heater is just coiled up. I don't think that would work).
+Quick and dirty hotplate predictive PI controller in 256 lines of C++. Should be easy to adapt to any build. My particular hot plate is made from the heating element of an (~50 year) old electric stove. The heating element itself is built in a big iron plate (it's not the US version where the heater is just coiled up with air between the truns. I don't think that would work).
 
 ![hot plate](assets/hot_plate.jpg)
 
