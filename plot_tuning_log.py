@@ -10,7 +10,7 @@ for i, line in enumerate(lines):
    y_curr.append(float(line.split("temp: ")[1].strip().split(" ")[0]))
 
 dt =  5 * 60 / len(y_curr) 
-TUNE_POWER = 0.1
+TUNE_POWER = 0.15
 x_curr = [i * dt for i in range(len(y_curr))]
 
 t_ambient = y_curr[0]
