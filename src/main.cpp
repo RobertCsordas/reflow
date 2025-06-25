@@ -50,11 +50,9 @@ void heaterOn(float duty){
   ledcWrite(LEDC_CHANNEL, int(4095 * duty));
 }
 
-
 void heaterOff(){
   heaterOn(0);
 }
-
 
 float tAmbient = 0.0;
 float yCurrentEstimate = 0.0;
@@ -79,9 +77,6 @@ void setProfileStep(int index, float currentTemp) {
   }
   slope = ((thermalProfile[index].targetTemp - currentTemp) / thermalProfile[index].duration) / 1000.0; // °C/ms
 }
-
-
-
 
 
 void setup() {
@@ -141,6 +136,7 @@ int tune_state = 0;
 float hist[TUNE_STEPS] = {0.0};
 float temp0 = 0.0;
 
+
 void tune(unsigned long now, float temp) {
   if (tune_state == 0){
     temp0 = temp;
@@ -160,7 +156,6 @@ void tune(unsigned long now, float temp) {
     }
 
     float L_est_tresh = i0 * SAMPLE_PERIOD;
-
 
     const int xmid = TUNE_STEPS / 2;
     float m = (hist[TUNE_STEPS-1] - hist[xmid]) / ((TUNE_STEPS - 1.0f - xmid) * SAMPLE_PERIOD) / TUNE_POWER;
@@ -206,9 +201,7 @@ float controller(unsigned long now, float temp, float target, float &futureTemp)
   integral = constrain(integral + error * dt, -0.5/Ki, 0.5/Ki); // Constrain integral to avoid windup
   float derivative = (error - lastError) / dt;
 
-  float u = Kp * error
-          + Ki * integral
-          + Kd * derivative;
+  float u = Kp * error + Ki * integral + Kd * derivative;
 
   u = constrain(u, 0.0, 1.0);
   hist[hist_index] = u;
@@ -219,7 +212,6 @@ float controller(unsigned long now, float temp, float target, float &futureTemp)
   }
   return u;
 }
-
 
 float targetTemp = 0.0;
 

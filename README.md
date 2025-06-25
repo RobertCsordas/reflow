@@ -1,6 +1,6 @@
 # Quick and Dirty Reflow Hotplate
 
-Quick and dirty hotplate made from the heating element of an (~50 year) old electric stove. Should be easy to adapt to any build. The element itself is built in a big iron plate (it's not the US version where the heater is just coiled up. I don't think that would work).
+Quick and dirty hotplate made from the heating element of an (~50 year) old electric stove and 256 lines of C++ code. Should be easy to adapt to any build. The element itself is built in a big iron plate (it's not the US version where the heater is just coiled up. I don't think that would work).
 
 ![hot plate](assets/hot_plate.jpg)
 
@@ -18,7 +18,7 @@ First it identifies the delay and gain of the system. Then, it uses a predictive
 
 ## How to set it up?
 
-Set `tuning=true` in `src/main.cpp` and upload it to the board. The plate should be at room temperature. The system will start the parameter estimation, which should take 5 minutes. At the end, it will print out the parameters `L` and `M`. Copy these two parameters to the corresponding variables in `src/main.cpp`, set `tuning=false`, and run the code. The plate should be <50℃ before staring in order to obtain the best results. You need to redo this only after hardware modifications (this includes moving the position of the thermocouple).
+Set `tuning=true` in `src/main.cpp` and upload it to the board. The plate should be at room temperature. The system will start the parameter estimation, which should take 5 minutes. At the end, it will print out the parameters `L` and `M`. Copy these two parameters to the corresponding variables in `src/main.cpp`, set `tuning=false`, and run the code and check how well it performs (see "How to solder?" below). You need to redo calibration only after hardware modifications (this includes moving the position of the thermocouple). 
 
 If you experinece some issue with the parameter fitting, you can copy the log output of the tuning to `tuning_log.txt` and run `plot_tuning_log.py`, which should do the same fitting and print out the same `L` and `M` parameters (in fact I used this for development, this is verified to work). It will also produce a plot of the fit in `log_tune.pdf`:
 
@@ -31,9 +31,10 @@ If you want to modify the thermal profile, edit variable `thermalProfile` in `ma
 
 ## How to solder?
 
-Turn the board on. Check the temperature log on the serial port. The job finished when it reaches stage equal to the length of the profile (with the current profile, stage 4. Each element in the profile curve is a stage). Leave the PCB on the board for another 60-90s and remove it carfeully to cool down. You can copy the logs to `log.txt` and run `plot_log.py` to see how well the system respect the thermal profile.
+The plate should be <50℃ before staring in order to obtain the best results. Turn the board on. Check the temperature log on the serial(-to-usb) port. The job finished when it reaches stage equal to the length of the profile (with the current profile, stage 4. Each element in the profile curve is a stage). Leave the PCB on the board for another 60-90s and remove it carfeully to cool down. You can copy the logs to `log.txt` and run `plot_log.py` to see how well the system respect the thermal profile.
 
 ![log_profile](assets/log_profile.png)
 
+## How to build the code?
 
-
+Open the project with PlatformIO in VSCode and click "Upload and Monitor" in the PlatformIO tab.
